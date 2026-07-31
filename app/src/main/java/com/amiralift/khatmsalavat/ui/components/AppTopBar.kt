@@ -1,6 +1,7 @@
 package com.amiralift.khatmsalavat.ui.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,24 +14,43 @@ import androidx.compose.runtime.Composable
 @Composable
 fun AppTopBar(
     title: String,
-    onMenuClick: () -> Unit
+    showBackButton: Boolean = false,
+    onMenuClick: () -> Unit = {},
+    onBackClick: () -> Unit = {}
 ) {
 
     CenterAlignedTopAppBar(
 
         title = {
-            Text(text = title)
+            Text(
+                text = title
+            )
         },
 
         navigationIcon = {
 
             IconButton(
-                onClick = onMenuClick
+
+                onClick = {
+                    if (showBackButton) {
+                        onBackClick()
+                    } else {
+                        onMenuClick()
+                    }
+                }
+
             ) {
 
                 Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu"
+
+                    imageVector = if (showBackButton) {
+                        Icons.Default.ArrowBack
+                    } else {
+                        Icons.Default.Menu
+                    },
+
+                    contentDescription = null
+
                 )
 
             }
