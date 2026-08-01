@@ -8,15 +8,23 @@ import com.amiralift.khatmsalavat.ui.screens.home.HomeScreen
 import com.amiralift.khatmsalavat.ui.screens.quran.QuranScreen
 import com.amiralift.khatmsalavat.ui.screens.masoom.MasoomScreen
 import com.amiralift.khatmsalavat.ui.screens.manage.QuranPartScreen
+import com.amiralift.khatmsalavat.ui.screens.manage.SalavatRoundScreen
+import com.amiralift.khatmsalavat.viewmodel.SalavatViewModelFactory
+import com.amiralift.khatmsalavat.ui.screens.manage.SalavatPeopleScreen
+
 @Composable
-fun AppNavigation() {
+fun AppNavigation(
+    salavatFactory: SalavatViewModelFactory
+) {
 
     val navController = rememberNavController()
+
 
     NavHost(
         navController = navController,
         startDestination = "home"
     ) {
+
 
         composable(
             route = "home"
@@ -39,6 +47,7 @@ fun AppNavigation() {
 
         }
 
+
         composable(
             route = "masoom"
         ) {
@@ -49,6 +58,7 @@ fun AppNavigation() {
 
         }
 
+
         composable(
             route = "quran_people"
         ) {
@@ -56,6 +66,70 @@ fun AppNavigation() {
             QuranPartScreen(
                 navController = navController
             )
+
+        }
+
+
+        composable(
+            route = "salavat_rounds"
+        ) {
+
+            SalavatRoundScreen(
+
+                factory = salavatFactory,
+
+                onRoundClick = { roundId ->
+
+                    navController.navigate(
+                        "salavat_people/$roundId"
+                    )
+
+                },
+
+                onBackClick = {
+
+                    navController.popBackStack()
+
+                }
+
+            )
+
+        }
+
+
+        composable(
+            route = "salavat_people/{roundId}"
+        ) { backStackEntry ->
+
+
+            val roundId =
+                backStackEntry.arguments
+                    ?.getString("roundId")
+                    ?.toInt()
+                    ?: 0
+
+
+
+            SalavatPeopleScreen(
+
+                roundId = roundId,
+
+                factory = salavatFactory,
+
+                onBackClick = {
+
+                    navController.popBackStack()
+
+                },
+
+                onDeleteRound = {
+
+                    navController.popBackStack()
+
+                }
+
+            )
+
 
         }
 

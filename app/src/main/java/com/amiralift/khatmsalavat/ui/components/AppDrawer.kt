@@ -5,9 +5,11 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
+
 @Composable
 fun AppDrawer(
-    onQuranPeopleClick: () -> Unit
+    onQuranPeopleClick: () -> Unit,
+    onSalavatRoundsClick: () -> Unit
 ) {
 
     ModalDrawerSheet {
@@ -28,7 +30,9 @@ fun AppDrawer(
             selected = false,
 
             onClick = {
+
                 onQuranPeopleClick()
+
             }
 
         )
@@ -45,6 +49,8 @@ fun AppDrawer(
             selected = false,
 
             onClick = {
+
+                onSalavatRoundsClick()
 
             }
 

@@ -5,13 +5,18 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
-        QuranPartEntity::class
+        QuranPartEntity::class,
+        SalavatRoundEntity::class,
+        SalavatPersonEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun quranPartDao(): QuranPartDao
 
+    abstract fun salavatRoundDao(): SalavatRoundDao
+
+    abstract fun salavatPersonDao(): SalavatPersonDao
 }

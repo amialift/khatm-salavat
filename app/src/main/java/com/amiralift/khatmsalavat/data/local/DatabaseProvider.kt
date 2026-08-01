@@ -5,10 +5,8 @@ import androidx.room.Room
 
 object DatabaseProvider {
 
-
     @Volatile
     private var INSTANCE: AppDatabase? = null
-
 
     fun getDatabase(
         context: Context
@@ -21,14 +19,12 @@ object DatabaseProvider {
                 AppDatabase::class.java,
                 "khatm_salavat_database"
             )
+                .fallbackToDestructiveMigration()
                 .build()
-
 
             INSTANCE = instance
 
             instance
         }
-
     }
-
 }
