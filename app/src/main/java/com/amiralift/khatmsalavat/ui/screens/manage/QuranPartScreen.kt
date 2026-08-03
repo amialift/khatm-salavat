@@ -57,11 +57,17 @@ fun QuranPartScreen(
         topBar = {
 
             AppTopBar(
-                title = "مدیریت ختم قرآن"
+
+                title = "مدیریت ختم قرآن",
+
                 showBackButton = true,
+
                 onBackClick = {
+
                     navController.popBackStack()
+
                 }
+
             )
 
         }
