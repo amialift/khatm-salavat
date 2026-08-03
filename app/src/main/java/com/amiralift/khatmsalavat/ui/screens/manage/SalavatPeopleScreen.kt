@@ -28,6 +28,7 @@ import com.amiralift.khatmsalavat.data.local.SalavatRoundEntity
 import com.amiralift.khatmsalavat.ui.components.AppTopBar
 import com.amiralift.khatmsalavat.viewmodel.SalavatViewModel
 import com.amiralift.khatmsalavat.viewmodel.SalavatViewModelFactory
+import androidx.compose.foundation.layout.imePadding
 
 
 @Composable
@@ -117,12 +118,19 @@ fun SalavatPeopleScreen(
         LazyColumn(
 
             modifier = Modifier
+
                 .fillMaxSize()
+
                 .padding(padding)
-                .padding(16.dp),
+
+                .padding(16.dp)
+
+                .imePadding(),
 
 
-            contentPadding = PaddingValues(),
+            contentPadding = PaddingValues(
+                bottom = 40.dp
+            ),
 
 
             verticalArrangement = Arrangement.spacedBy(12.dp)

@@ -72,11 +72,22 @@ fun QuranPartScreen(
         LazyColumn(
 
             modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
 
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+                .fillMaxSize()
+
+                .padding(padding)
+
+                .padding(16.dp)
+
+                .imePadding(),
+
+
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+
+
+            contentPadding = PaddingValues(
+                bottom = 32.dp
+            )
 
         ) {
 
@@ -99,9 +110,11 @@ fun QuranPartScreen(
 
                     value = name,
 
+
                     onValueChange = {
 
                         name = it
+
 
                         viewModel.updatePart(
                             part.partNumber,
@@ -110,6 +123,7 @@ fun QuranPartScreen(
 
                     },
 
+
                     label = {
 
                         Text(
@@ -117,6 +131,7 @@ fun QuranPartScreen(
                         )
 
                     },
+
 
                     modifier = Modifier.fillMaxWidth()
 

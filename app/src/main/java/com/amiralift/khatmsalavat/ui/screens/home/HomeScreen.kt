@@ -12,12 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.amiralift.khatmsalavat.ui.components.AppDrawer
 import com.amiralift.khatmsalavat.ui.components.AppTopBar
 import com.amiralift.khatmsalavat.ui.components.MenuCard
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import androidx.compose.ui.unit.dp
 
 
 @Composable
@@ -25,131 +26,226 @@ fun HomeScreen(
     navController: NavController
 ) {
 
+
     val drawerState = rememberDrawerState(
         initialValue = DrawerValue.Closed
     )
 
+
     val scope = rememberCoroutineScope()
+
 
 
     ModalNavigationDrawer(
 
         drawerState = drawerState,
 
+
         drawerContent = {
+
 
             AppDrawer(
 
                 onQuranPeopleClick = {
 
+
                     scope.launch {
 
-                        drawerState.close()
+                        try {
+
+                            drawerState.close()
+
+                        } catch (_: CancellationException) {
+
+
+                        }
+
+
+                        navController.navigate(
+                            "quran_people"
+                        )
 
                     }
 
-                    navController.navigate("quran_people")
 
                 },
 
 
                 onSalavatRoundsClick = {
 
+
                     scope.launch {
 
-                        drawerState.close()
+                        try {
+
+                            drawerState.close()
+
+                        } catch (_: CancellationException) {
+
+
+                        }
+
+
+                        navController.navigate(
+                            "salavat_rounds"
+                        )
 
                     }
 
-                    navController.navigate("salavat_rounds")
 
                 }
 
+
             )
 
+
         }
+
+
 
     ) {
 
 
+
         Scaffold(
+
 
             topBar = {
 
+
                 AppTopBar(
+
 
                     title = "ختم صلوات",
 
+
                     onMenuClick = {
 
-                        scope.launch {
 
-                            drawerState.open()
+                        if (!drawerState.isOpen &&
+                            !drawerState.isAnimationRunning
+                        ) {
+
+
+                            scope.launch {
+
+
+                                try {
+
+
+                                    drawerState.open()
+
+
+                                } catch (_: CancellationException) {
+
+
+                                }
+
+
+                            }
+
 
                         }
 
+
                     }
+
 
                 )
 
+
             }
+
+
 
         ) { innerPadding ->
 
 
+
             Column(
 
+
                 modifier = Modifier
+
                     .fillMaxSize()
+
                     .padding(innerPadding)
+
                     .padding(horizontal = 20.dp),
+
 
                 horizontalAlignment = Alignment.CenterHorizontally,
 
+
                 verticalArrangement = Arrangement.Center
+
 
             ) {
 
 
+
                 Column(
 
+
                     verticalArrangement = Arrangement.spacedBy(16.dp)
+
 
                 ) {
 
 
+
                     MenuCard(
+
 
                         title = "📖 ختم قرآن",
 
+
                         onClick = {
 
-                            navController.navigate("quran")
+
+                            navController.navigate(
+                                "quran"
+                            )
+
 
                         }
+
 
                     )
 
 
+
                     MenuCard(
+
 
                         title = "🌹 قرعه معصومین",
 
+
                         onClick = {
 
-                            navController.navigate("masoom")
+
+                            navController.navigate(
+                                "masoom"
+                            )
+
 
                         }
+
 
                     )
 
 
                 }
 
+
             }
+
+
 
         }
 
+
     }
+
 
 }
