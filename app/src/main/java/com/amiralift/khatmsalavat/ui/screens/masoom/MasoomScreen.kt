@@ -56,11 +56,8 @@ fun MasoomScreen(
 
     val repository =
         SalavatRepository(
-
             database.salavatRoundDao(),
-
             database.salavatPersonDao()
-
         )
 
     val viewModel: MasoomViewModel = viewModel(
@@ -74,6 +71,7 @@ fun MasoomScreen(
     val results by viewModel.results
         .collectAsStateWithLifecycle()
 
+
     val shareText = remember(results) {
 
         SalavatShareFormatter.format(
@@ -82,13 +80,14 @@ fun MasoomScreen(
 
     }
 
+
     Scaffold(
 
         topBar = {
 
             AppTopBar(
 
-                title = "قرعه معصومین",
+                title = "ختم صلوات",
 
                 showBackButton = true,
 
@@ -104,6 +103,7 @@ fun MasoomScreen(
 
     ) { padding ->
 
+
         Column(
 
             modifier = Modifier
@@ -114,6 +114,7 @@ fun MasoomScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
 
         ) {
+
 
             Button(
 
@@ -133,6 +134,7 @@ fun MasoomScreen(
 
             }
 
+
             Row(
 
                 modifier = Modifier.fillMaxWidth(),
@@ -141,6 +143,7 @@ fun MasoomScreen(
                     Arrangement.spacedBy(8.dp)
 
             ) {
+
 
                 Button(
 
@@ -156,13 +159,14 @@ fun MasoomScreen(
 
                             ClipData.newPlainText(
 
-                                "MasoomLottery",
+                                "SalavatKhatm",
 
                                 shareText
 
                             )
 
                         )
+
 
                         Toast.makeText(
 
@@ -182,6 +186,7 @@ fun MasoomScreen(
 
                 }
 
+
                 Button(
 
                     modifier =
@@ -191,6 +196,7 @@ fun MasoomScreen(
                         results.isNotEmpty(),
 
                     onClick = {
+
 
                         val intent = Intent(
                             Intent.ACTION_SEND
@@ -205,13 +211,14 @@ fun MasoomScreen(
 
                         }
 
+
                         context.startActivity(
 
                             Intent.createChooser(
 
                                 intent,
 
-                                "اشتراک گذاری نتیجه قرعه"
+                                "اشتراک گذاری نتیجه ختم صلوات"
 
                             )
 
@@ -227,9 +234,11 @@ fun MasoomScreen(
 
             }
 
+
             Spacer(
                 modifier = Modifier.height(8.dp)
             )
+
 
             LazyColumn(
 
@@ -238,7 +247,9 @@ fun MasoomScreen(
 
             ) {
 
+
                 items(results) { round ->
+
 
                     Card(
 
@@ -246,6 +257,7 @@ fun MasoomScreen(
                             .fillMaxWidth()
 
                     ) {
+
 
                         Column(
 
@@ -257,13 +269,17 @@ fun MasoomScreen(
 
                         ) {
 
+
                             Text(
 
-                                text = "دور ${round.roundNumber}"
+                                text =
+                                    "دور ${numberToPersian(round.roundNumber)}"
 
                             )
 
+
                             round.results.forEachIndexed { index, result ->
+
 
                                 Text(
 
@@ -274,15 +290,44 @@ fun MasoomScreen(
 
                             }
 
+
                         }
 
                     }
 
+
                 }
+
 
             }
 
+
         }
+
+
+    }
+
+}
+
+
+private fun numberToPersian(
+    number: Int
+): String {
+
+    return when (number) {
+
+        1 -> "اول"
+        2 -> "دوم"
+        3 -> "سوم"
+        4 -> "چهارم"
+        5 -> "پنجم"
+        6 -> "ششم"
+        7 -> "هفتم"
+        8 -> "هشتم"
+        9 -> "نهم"
+        10 -> "دهم"
+
+        else -> number.toString()
 
     }
 

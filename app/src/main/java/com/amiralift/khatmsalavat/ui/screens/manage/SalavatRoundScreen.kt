@@ -53,7 +53,7 @@ fun SalavatRoundScreen(
 
             AppTopBar(
 
-                title = "قرعه معصومین",
+                title = "مدیریت ختم صلوات",
 
                 showBackButton = true,
 

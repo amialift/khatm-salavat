@@ -37,7 +37,7 @@ object SalavatLottery {
                     masoomName = masoom,
 
                     personName = names.getOrNull(index)
-                        ?: "خالی"
+                        ?: ""
 
                 )
 
@@ -45,6 +45,5 @@ object SalavatLottery {
 
 
     }
-
 
 }

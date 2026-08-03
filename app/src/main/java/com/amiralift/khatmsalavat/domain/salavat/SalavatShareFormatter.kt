@@ -10,10 +10,11 @@ object SalavatShareFormatter {
 
         return buildString {
 
-            rounds.forEach { round ->
+            rounds.forEachIndexed { roundIndex, round ->
 
-                appendLine("دور ${numberToPersian(round.roundNumber)}")
-                appendLine()
+                appendLine(
+                    "دور ${numberToPersian(round.roundNumber)}"
+                )
 
                 round.results.forEachIndexed { index, result ->
 
@@ -23,12 +24,15 @@ object SalavatShareFormatter {
 
                 }
 
-                appendLine("التماس دعا")
-                appendLine()
+                appendLine("التماس دعا        ")
+
+                if (roundIndex != rounds.lastIndex) {
+                    appendLine()
+                }
 
             }
 
-        }.trimEnd()
+        }
 
     }
 
