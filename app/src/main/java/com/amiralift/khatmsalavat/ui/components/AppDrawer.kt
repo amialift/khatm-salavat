@@ -1,9 +1,12 @@
 package com.amiralift.khatmsalavat.ui.components
 
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 
 @Composable
@@ -12,18 +15,16 @@ fun AppDrawer(
     onSalavatRoundsClick: () -> Unit
 ) {
 
-    ModalDrawerSheet {
-
-        Text(
-            text = "ختم صلوات"
-        )
+    ModalDrawerSheet(
+        modifier = Modifier.width(280.dp)
+    ) {
 
 
         NavigationDrawerItem(
 
             label = {
                 Text(
-                    text = "مدیریت افراد ختم قرآن"
+                    text = "مدیریت ختم قرآن"
                 )
             },
 
@@ -42,7 +43,7 @@ fun AppDrawer(
 
             label = {
                 Text(
-                    text = "مدیریت افراد قرعه معصومین"
+                    text = "مدیریت ختم صلوات"
                 )
             },
 
@@ -51,23 +52,6 @@ fun AppDrawer(
             onClick = {
 
                 onSalavatRoundsClick()
-
-            }
-
-        )
-
-
-        NavigationDrawerItem(
-
-            label = {
-                Text(
-                    text = "مدیریت اسامی معصومین"
-                )
-            },
-
-            selected = false,
-
-            onClick = {
 
             }
 

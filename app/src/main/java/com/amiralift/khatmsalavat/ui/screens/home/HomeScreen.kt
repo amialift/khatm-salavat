@@ -136,14 +136,13 @@ fun HomeScreen(
 
                     MenuCard(
 
-                        title = "🌹 قرعه معصومین",
+                        title = "🌹 ختم صلوات",
 
                         onClick = {
 
                             navController.navigate("masoom")
 
                         }
-
                     )
 
                 }
